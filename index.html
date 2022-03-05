@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>flickr</title>
+	<link rel="stylesheet" href="css/style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="js/jquery.easing.1.3.js"></script>
+	<script defer src="js/isotope.pkgd.min.js"></script>
+	<script defer src="js/myFlickr_객체지향.js"></script>
+	 <script>
+	$(document).ready(()=>{
+			new Flickr('section',{			
+				key: 'cf213181fbdb73a0ce6d71164837c0c8',
+				num: 50
+			});
+		})
+	</script>   
+</head>
+<body>
+	<section class="content">
+		<div class="inner">
+			<h1>Flickr Gallery</h1>
+
+			<img src="loading.gif" class='loading' />
+
+			<div id="searchBox">
+				<input type="text" placeholder="검색어를 입력하세요.">
+				<button>검색</button>
+			</div>
+
+			<div id="gallery">				
+			</div>
+		</div>
+	</section>
+</body>
+</html>
