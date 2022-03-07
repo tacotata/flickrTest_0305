@@ -62,6 +62,8 @@ class Flickr {
 
     //.bind(this) 이거 안해서 하루종일 검색 클릭하면 클릭 안되고
     //Cannot read properties of undefined (reading 'val') 뜨고
+    //getTags메서드 안쪽의 모든 this객체를 인스턴스로 고정
+    //(click ,()=>this.getTags());
     this.searchBtn.on('click', this.getTags.bind(this))
 
     /*
@@ -83,7 +85,8 @@ class Flickr {
 
     //썸네일 클릭시 팝업 생성
     $('body').on('click', '#gallery ul li>.inner>a', (e) => {
-      // 이거 왜 사용했지 ?
+      // 이거 왜 사용했지 ? 왜냐면 바로
+      console.log('dd')
       e.preventDefault()
       $('body').css('overflow', 'hidden')
       const imgSrc = $(e.currentTarget).attr('href')
@@ -230,7 +233,20 @@ class Flickr {
       }
     })
   }
-
+  /**
+ * 
+ *this값은 위치에 따라 해당 값이 지칭하는 바가 다름 
+ 이벤트문 , settimeout  반복문이 특히 발생함
+ 이벤트문안에서의 this값은 ->이벤트가 발생하는 객체를 지칭 
+ 저기는 this. searchbtn을 지칭하게됨 
+ 우리는 그게 아니라  searchinput을 지칭해야하는데 깨지는거ㅑㅇ 
+ 함수 안쪽에 있는 this값을 함수외부에서 원하는 값으로 바인딩처리 
+ ->bind(); 
+ 예외 사항 만약 화살표 함수 안쪽에 this 값이 있으면 해당 this는 변혀잉 
+ 안일어남 참조값이 바뀌지 않는다 
+ 인스턴스를 참조해야하는 function이면 이벤트문이면 안쪽 인스턴스 고정하고 싶으며ㅑㄴ bind(this) 
+ * ()=> (this.gettags())
+ */
   //검색기능 함수
   getTags() {
     let inputs = this.searchInput.val()
